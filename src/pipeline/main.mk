@@ -7,7 +7,7 @@ PLGD_PM = $(wildcard ./pipeline/Plgd/*.pm)
 TARGET_PLGD_PM = $(patsubst ./pipeline/Plgd/%, ${TARGET_DIR}/Plgd/%, $(PLGD_PM))
 
 all: ${TARGET_DIR}/necat.pl ${TARGET_DIR}/Necat.pm ${TARGET_DIR}/necat.sh \
-               ${TARGET_PLGD_PM} \
+               ${TARGET_PLGD_PM} ${TARGET_DIR}/necat-fec.pl\
 	       ${TARGET_SCRIPTS}
 
 ${TARGET_DIR}/necat.pl: pipeline/necat.pl
@@ -15,6 +15,10 @@ ${TARGET_DIR}/necat.pl: pipeline/necat.pl
 	cp -pf pipeline/necat.pl ${TARGET_DIR}/necat.pl
 	chmod +x ${TARGET_DIR}/necat.pl
 
+${TARGET_DIR}/necat-fec.pl: pipeline/necat-fec.pl
+	@if [ ! -e ${TARGET_DIR} ] ; then mkdir -p ${TARGET_DIR}/ ; fi
+	cp -pf pipeline/necat-fec.pl ${TARGET_DIR}/necat-fec.pl
+	chmod +x ${TARGET_DIR}/necat-fec.pl
 	
 ${TARGET_DIR}/Necat.pm: pipeline/Necat.pm
 	@if [ ! -e ${TARGET_DIR} ] ; then mkdir -p ${TARGET_DIR}/ ; fi
